@@ -418,7 +418,7 @@ studio.forms.ImageField = studio.forms.Field.extend({
         break;
 
       case 'text':
-        var size = { w: 4800, h: 1600 };
+        var size = { w: 4800, h: 1300 };
         var textHeight = size.h * 0.75;
         var ctx = imagelib.drawing.context(size);
         var text = this.textParams_.text || '';
@@ -426,9 +426,13 @@ studio.forms.ImageField = studio.forms.Field.extend({
 
         ctx.fillStyle = '#000';
         ctx.font = 'bold ' + textHeight + 'px/' + size.h + 'px ' + this.textParams_.fontStack;
+
         ctx.textBaseline = 'alphabetic';
         ctx.fillText(text, 0, textHeight);
         size.w = Math.ceil(Math.min(ctx.measureText(text).width, size.w) || size.w);
+        // size.w = Math.ceil(ctx.measureText(text).width || size.w);
+
+        console.log(ctx.font + "  " + size.w);
 
         continue_(ctx, size);
         break;
